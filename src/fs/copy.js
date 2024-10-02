@@ -9,7 +9,7 @@ const copy = async () => {
         "./src/fs/files_copy",
         { recursive: true },
         (err) => {
-          if (err) throw err;
+          if (err) throw new Error("FS operation failed");
         }
       );
     }
