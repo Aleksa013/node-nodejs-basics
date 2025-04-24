@@ -1,4 +1,3 @@
-import { error } from 'node:console';
 import { cp, opendir, access } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
