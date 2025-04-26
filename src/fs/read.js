@@ -3,8 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const __filepath =fileURLToPath(import.meta.url);
-const __dirname = dirname(__filepath);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const read = async () => {
    try{

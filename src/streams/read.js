@@ -3,9 +3,7 @@ import { dirname } from 'node:path';
 import { createReadStream } from "node:fs";
 import { stdout } from "node:process";
 
-
-const __filepath = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filepath);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const read = async () => { 
  const rs = createReadStream(`${__dirname}/files/fileToRead.txt`);

@@ -4,8 +4,8 @@ import { createWriteStream } from "node:fs";
 import { stdin } from "node:process";
 
 
-const __filepath = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filepath);
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const write = async () => {
     const ws = createWriteStream(`${__dirname}/files/fileToWrite.txt`);
     ws.on('error', (error)=> console.error(error))
