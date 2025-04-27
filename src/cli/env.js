@@ -1,4 +1,4 @@
-import { env, stdout } from'node:process';
+import { env } from'node:process';
 
 
 const parseEnv = () => {
