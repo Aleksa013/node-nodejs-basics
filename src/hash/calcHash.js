@@ -1,7 +1,5 @@
 import { createReadStream } from 'node:fs';
 import { dirname } from 'node:path';
-import { stdout } from 'node:process';
-import { pipeline } from 'node:stream/promises';
 import { fileURLToPath } from 'node:url';
 const { createHash } = await import('node:crypto');
 
