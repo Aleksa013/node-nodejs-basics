@@ -4,43 +4,44 @@ import { isMainThread, Worker} from 'node:worker_threads';
 import { cpus } from 'node:os';
 
 
-
 const __dirname = dirname(fileURLToPath(import.meta.url))
-
+// this code is for simulating  random behavior
+const simulateRandomBehavior = (number) => Math.random() > 0.5 ? number : 'haha!'
 
 const getResultWorker = async(message) => {
     return new Promise((resolve, reject) => {
         const worker =  new Worker(`${__dirname}/worker.js`, { workerData: {message}});
         worker.on('message', resolve)
         worker.on('error', reject)
-        worker.on('exit', (code)=> {
-            if(code !== 0)
-                throw new Error(code)
-        }) 
-    })        
+      
+    })         
 }
 const performCalculations = async () => {
     const resultArray = [];
     if(isMainThread) {
         for(let i = 0; i < cpus().length; i++){  
-           const result = await getResultWorker(`${i+10}`)
-           .then((data, error) => {
+           const result = await getResultWorker(simulateRandomBehavior(`${i+10}`))
+           .catch(() =>  {
+                return null
+            })
+           .then((data) => {
             if(data){
                 return {
                     status:'resolved',
                     data
                 }
-            } 
-            if(error) {
+            } else {
                 return {
                     status:'error',
                     data: null
                 }
             }
+            
            })
            resultArray.push(result)
-           if(i === cpus().length - 1) console.log(resultArray)
+
        }
+       Promise.all(resultArray).then((array) => console.log(array))
     }
     
 };
